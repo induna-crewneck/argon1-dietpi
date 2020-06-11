@@ -18,20 +18,19 @@ argon_check_pkg() {
     fi
 }
 
-pkglist=(raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools)
-for curpkg in ${pkglist[@]}; do
-	sudo apt-get install -y $curpkg
-	RESULT=$(argon_check_pkg "$curpkg")
-	if [ "NG" == "$RESULT" ]
-	then
-		echo "********************************************************************"
-		echo "Please also connect device to the internet and restart installation."
-		echo "********************************************************************"
-		exit
-	fi
-done
-
-
+#pkglist=(raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools)
+#for curpkg in ${pkglist[@]}; do
+#	sudo apt-get install -y $curpkg
+#	RESULT=$(argon_check_pkg "$curpkg")
+#	if [ "NG" == "$RESULT" ]
+#	then
+#		echo "********************************************************************"
+#		echo "Please also connect device to the internet and restart installation."
+#		echo "********************************************************************"
+#		exit
+#	fi
+#done
+apt-get install raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools -y
 
 daemonname="argononed"
 powerbuttonscript=/usr/bin/$daemonname.py
