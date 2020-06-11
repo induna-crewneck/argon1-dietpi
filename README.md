@@ -5,9 +5,9 @@ You probably need to be logged in as root to make everything work. Not sure thou
 ### Download my stuff
 I have edited the argon1 script that installs the necessary files and makes the fan adapt to temperature, so that it works on DietPi. For it to work though we also need another file. So in total you'll need argon1.sh and argonsetup in /etc/argon1. These commands should take care of everything for you.
 
-1. Installing git. This is needed to clone repositories from github.
+1. Installing required software.
 ```
-apt-get install git -y
+apt-get install git raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools -y
 ```
 2. Getting the Files from my GitHub Repository
 ```
