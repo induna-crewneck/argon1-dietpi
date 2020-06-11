@@ -1,4 +1,5 @@
-<# Getting Argon 1 Fan Hat to run on DietPi
+<
+# Getting Argon 1 Fan Hat to run on DietPi
 
 You probably need to be logged in as root to make everything work. Not sure though. Speaking of which, this is very inofficial and DIY. Use at your own caution, please.
 
