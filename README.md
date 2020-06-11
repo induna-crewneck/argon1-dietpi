@@ -26,3 +26,7 @@ reboot
 ```
 rm -r /root/argon1-dietpi
 ```
+6. Test
+```
+systemctl status argononed.service
+```
