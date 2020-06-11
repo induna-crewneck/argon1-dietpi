@@ -30,7 +30,7 @@ argon_check_pkg() {
 #		exit
 #	fi
 #done
-apt-get install raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools -y
+#----installed previously
 
 daemonname="argononed"
 powerbuttonscript=/usr/bin/$daemonname.py
