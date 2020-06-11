@@ -41,8 +41,8 @@ removescript=/usr/bin/argonone-uninstall
 
 daemonfanservice=/lib/systemd/system/$daemonname.service
 
-/etc/argon1/argonsetup nonint do_i2c 0
-/etc/argon1/argonsetup nonint do_serial 0	
+sudo /etc/argon1/argonsetup nonint do_i2c 0
+sudo /etc/argon1/argonsetup nonint do_serial 0	
 	
 if [ ! -f $daemonconfigfile ]; then
 	# Generate config file for fan speed
