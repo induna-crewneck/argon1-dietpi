@@ -13,22 +13,15 @@ apt-get install git -y
 ```
 git clone https://github.com/induna-crewneck/argon1-dietpi.git
 ```
-3. Cleaning up some space by removing the unneeded files
+3. Run the script
 ```
-rm -r /root/argon1-dietpi/.git
-rm /root/argon1-dietpi/.internalinfo.md
-rm /root/argon1-dietpi/README.md
+sh /root/argon1-dietpi/argon1.sh
 ```
-4. Moving the Repo Files to where they need to be and making them accessible.
-```
-mv /root/argon1-dietpi/ /etc/argon1
-chmod 777 /etc/argon1/argonsetup
-```
-5. Rebooting
+4. reboot probably
 ```
 reboot
 ```
-6. After the reboot run the script
+5. clean up
 ```
-sh /etc/argon1/argon1.sh
+rm -r /root/argon1-dietpi
 ```
