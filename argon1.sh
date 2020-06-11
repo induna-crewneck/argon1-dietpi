@@ -42,7 +42,13 @@ removescript=/usr/bin/argonone-uninstall
 daemonfanservice=/lib/systemd/system/$daemonname.service
 
 #sudo /boot/dietpi/argonsetup nonint do_i2c 0
-#sudo /boot/dietpi/argonsetup nonint do_serial 0	
+#sudo /boot/dietpi/argonsetup nonint do_serial 0
+#above 2 lines gave me headaches for 3 days. following lines should be all it needs
+sed --in-place "s/dtparam=i2c_arm=off/dtparam=i2c_arm=on/" /boot/config.txt
+sed --in-place "s/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/" /boot/config.txt
+sed --in-place "s/enable_uart=0/enable_uart=1/" /boot/config.txt
+sed --in-place "s/#enable_uart=1/enable_uart=1/" /boot/config.txt
+echo "i2c-dev" >> /etc/modules
 	
 if [ ! -f $daemonconfigfile ]; then
 	# Generate config file for fan speed
