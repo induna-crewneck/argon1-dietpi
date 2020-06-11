@@ -19,7 +19,7 @@ rm -r /root/argon1-dietpi/.git
 rm /root/argon1-dietpi/.internalinfo.md
 rm /root/argon1-dietpi/README.md
 ```
-4. Moving the Repo Files to where they need to be...
+4. Moving the Repo Files to where they need to be and making them accessible.
 ```
 mv /root/argon1-dietpi/ /etc/argon1
 chmod 777 /etc/argon1/argonsetup
