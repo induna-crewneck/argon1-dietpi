@@ -1,7 +1,12 @@
 #!/bin/bash
 # This file is edited. Make sure argonsetup is located in /etc/argon1/
 # This is part 2 of the script. Make sure you have completed all previous steps.
-	
+
+echo "Let's try this again."
+/etc/argon1/argonsetup nonint do_i2c 0
+/etc/argon1/argonsetup nonint do_serial 0
+echo "I tried."
+
 if [ ! -f $daemonconfigfile ]; then
 	# Generate config file for fan speed
 	sudo touch $daemonconfigfile
