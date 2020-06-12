@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # This is supposed to help install argon1.sh on DietPi.
 # Credit: https://github.com/induna-crewneck
 
