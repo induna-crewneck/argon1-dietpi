@@ -60,10 +60,10 @@ systemctl status argononed.service
    60=55
    65=100
    ```
-   - Set permissions for this file
-     ```
-     chmod 666 /etc/argononed.conf
-     ```
+  - Set permissions for this file
+    ```
+    chmod 666 /etc/argononed.conf
+    ```
 2. Manually create the script that runs every shutdown event because in some cases it's ok to let a script do the work for you
    ```
    nano /lib/systemd/system-shutdown/argononed-poweroff.py
