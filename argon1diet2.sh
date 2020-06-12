@@ -188,6 +188,7 @@ echo '#!/bin/bash' >> $removescript
 echo 'echo "-------------------------"' >> $removescript
 echo 'echo "Argon One Uninstall Tool"' >> $removescript
 echo 'echo "-------------------------"' >> $removescript
+echo 'echo "If you're on DietPi, argon1diet-uninstall.sh will probably be more effective. Maybe not though."' >> $removescript
 echo 'echo -n "Press Y to continue:"' >> $removescript
 echo 'read -n 1 confirm' >> $removescript
 echo 'echo' >> $removescript
@@ -397,50 +398,15 @@ echo 'fi' >> $configscript
 
 sudo chmod 755 $configscript
 
-
 sudo systemctl daemon-reload
 sudo systemctl enable $daemonname.service
 
 sudo systemctl start $daemonname.service
 
-if [ -d "/home/pi/Desktop" ]; then
-	sudo wget http://download.argon40.com/ar1config.png -O /usr/share/pixmaps/ar1config.png
-	sudo wget http://download.argon40.com/ar1uninstall.png -O /usr/share/pixmaps/ar1uninstall.png
-	# Create Shortcuts
-	shortcutfile="/home/pi/Desktop/argonone-config.desktop"
-	echo "[Desktop Entry]" > $shortcutfile
-	echo "Name=Argon One Configuration" >> $shortcutfile
-	echo "Comment=Argon One Configuration" >> $shortcutfile
-	echo "Icon=/usr/share/pixmaps/ar1config.png" >> $shortcutfile
-	echo 'Exec=lxterminal -t "Argon One Configuration" --working-directory=/home/pi/ -e '$configscript >> $shortcutfile
-	echo "Type=Application" >> $shortcutfile
-	echo "Encoding=UTF-8" >> $shortcutfile
-	echo "Terminal=false" >> $shortcutfile
-	echo "Categories=None;" >> $shortcutfile
-	chmod 755 $shortcutfile
-	
-	shortcutfile="/home/pi/Desktop/argonone-uninstall.desktop"
-	echo "[Desktop Entry]" > $shortcutfile
-	echo "Name=Argon One Uninstall" >> $shortcutfile
-	echo "Comment=Argon One Uninstall" >> $shortcutfile
-	echo "Icon=/usr/share/pixmaps/ar1uninstall.png" >> $shortcutfile
-	echo 'Exec=lxterminal -t "Argon One Uninstall" --working-directory=/home/pi/ -e '$removescript >> $shortcutfile
-	echo "Type=Application" >> $shortcutfile
-	echo "Encoding=UTF-8" >> $shortcutfile
-	echo "Terminal=false" >> $shortcutfile
-	echo "Categories=None;" >> $shortcutfile
-	chmod 755 $shortcutfile
-fi
-
+echo "No Desktop shortcuts will be created. You're a big boy, you can do things manually."
 
 echo "***************************"
 echo "Argon One Setup Completed."
 echo "***************************"
 echo 
-if [ -d "/home/pi/Desktop" ]; then
-	echo Shortcuts created in your desktop.
-else
-	echo Use 'argonone-config' to configure fan
-	echo Use 'argonone-uninstall' to uninstall
-fi
 echo
