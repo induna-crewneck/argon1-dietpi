@@ -18,38 +18,13 @@ argon_check_pkg() {
     fi
 }
 
-#pkglist=(raspi-gpio python-rpi.gpio python3-rpi.gpio python-smbus python3-smbus i2c-tools)
-#for curpkg in ${pkglist[@]}; do
-#	sudo apt-get install -y $curpkg
-#	RESULT=$(argon_check_pkg "$curpkg")
-#	if [ "NG" == "$RESULT" ]
-#	then
-#		echo "********************************************************************"
-#		echo "Please also connect device to the internet and restart installation."
-#		echo "********************************************************************"
-#		exit
-#	fi
-#done
-#----installed previously
-
 daemonname="argononed"
 powerbuttonscript=/usr/bin/$daemonname.py
 shutdownscript="/lib/systemd/system-shutdown/"$daemonname"-poweroff.py"
 daemonconfigfile=/etc/$daemonname.conf
 configscript=/usr/bin/argonone-config
-removescript=/usr/bin/argonone-uninstall
 
 daemonfanservice=/lib/systemd/system/$daemonname.service
-
-#raspi-config nonint do_i2c 0
-#raspi-config nonint do_serial 0	
-#above 2 lines gave me headaches for 3 days. following lines should be all it needs
-#Next 5 lines are attempted workarounds which should not be necessary if everything else is done according to my guide.
-#sed --in-place "s/dtparam=i2c_arm=off/dtparam=i2c_arm=on/" /boot/config.txt
-#sed --in-place "s/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/" /boot/config.txt
-#sed --in-place "s/enable_uart=0/enable_uart=1/" /boot/config.txt
-#sed --in-place "s/#enable_uart=1/enable_uart=1/" /boot/config.txt
-#echo "i2c-dev" >> /etc/modules
 	
 if [ ! -f $daemonconfigfile ]; then
 	# Generate config file for fan speed
@@ -229,43 +204,6 @@ echo '[Install]' >> $daemonfanservice
 echo "WantedBy=multi-user.target" >> $daemonfanservice
 
 sudo chmod 644 $daemonfanservice
-
-argon_create_file $removescript
-
-# Uninstall Script
-echo '#!/bin/bash' >> $removescript
-echo 'echo "-------------------------"' >> $removescript
-echo 'echo "Argon One Uninstall Tool"' >> $removescript
-echo 'echo "-------------------------"' >> $removescript
-echo 'echo -n "Press Y to continue:"' >> $removescript
-echo 'read -n 1 confirm' >> $removescript
-echo 'echo' >> $removescript
-echo 'if [ "$confirm" = "y" ]' >> $removescript
-echo 'then' >> $removescript
-echo '	confirm="Y"' >> $removescript
-echo 'fi' >> $removescript
-echo '' >> $removescript
-echo 'if [ "$confirm" != "Y" ]' >> $removescript
-echo 'then' >> $removescript
-echo '	echo "Cancelled"' >> $removescript
-echo '	exit' >> $removescript
-echo 'fi' >> $removescript
-echo 'if [ -d "/root/Desktop" ]; then' >> $removescript
-echo '	sudo rm "/root/Desktop/argonone-config.desktop"' >> $removescript
-echo '	sudo rm "/root/Desktop/argonone-uninstall.desktop"' >> $removescript
-echo 'fi' >> $removescript
-echo 'if [ -f '$powerbuttonscript' ]; then' >> $removescript
-echo '	sudo systemctl stop '$daemonname'.service' >> $removescript
-echo '	sudo systemctl disable '$daemonname'.service' >> $removescript
-echo '	sudo /usr/bin/python3 '$shutdownscript' uninstall' >> $removescript
-echo '	sudo rm '$powerbuttonscript >> $removescript
-echo '	sudo rm '$shutdownscript >> $removescript
-echo '	sudo rm '$removescript >> $removescript
-echo '	echo "Removed Argon One Services."' >> $removescript
-echo '	echo "Cleanup will complete after restarting the device."' >> $removescript
-echo 'fi' >> $removescript
-
-sudo chmod 755 $removescript
 
 argon_create_file $configscript
 
@@ -459,9 +397,7 @@ echo "Argon One Setup Completed."
 echo "***************************"
 echo 
 echo "Use 'argonone-config' to configure fan"
-echo "Use 'argonone-uninstall' to uninstall"
-sleep 1
-echo "Use 'sh /etc/argon1/argon1diet-uninstall.sh' to uninstall if you're on a diet."
+echo "Use 'sh /etc/argon1/argon1diet-uninstall.sh' to uninstall"
 sleep 2
 echo "8=====D"
 sleep 1
