@@ -6,8 +6,8 @@ I have modified the argon1 script that installs the necessary files and makes th
 
 Installation is pretty straight forward. 
 
-### The easy way
-#### Up and running in 3 easy steps!
+## The easy way
+### Up and running in 3 easy steps!
 1. (Optional) If you don't have 'git' installed:
 ```
 apt-get install git -y
@@ -25,8 +25,8 @@ sudo sh /root/argon1-dietpi/argon1diet.sh
 systemctl status argononed.service
 ```
 
-### The hands-on way
-#### If you want to get a little down and dirty
+## The hands-on way
+### If you want to get a little down and dirty
 1. Download [argon1diet.sh](/argon1diet.sh)
 
 2. Use FTP or whatever else means of getting files on your Pi to push the script (location doesn't matter AFAIK)
@@ -48,8 +48,8 @@ systemctl status argononed.service
    rm path/to/argon1diet.sh
    ```
 
-### The incredibly tedious, fully manual way
-#### If you just want to feel something again and this is your last resort before starting to eat thumb tacks
+## The incredibly tedious, fully manual way
+### If you just want to feel something again and this is your last resort before starting to eat thumb tacks
 1. Manually create the configuration file which asigns fan speeds to CPU temperature values
    ```
    nano /etc/argononed.conf
@@ -96,7 +96,7 @@ if len(sys.argv)>1:
    ```
    nano /usr/bin/argononed.py
    ```
-   In this file you can either copy the code below or manually enter it:
+   In this file you can copy the code below but in this instance I really suggest you manually type it to fill that void in your heart:
 ```
 #!/usr/bin/python
 import smbus
@@ -204,4 +204,38 @@ except:
 	t2.stop()
 	GPIO.cleanup()
 ```
-   
+   - Set permissions for this file
+     ```
+     chmod 755 /usr/bin/argononed.py
+     ```
+4. Manually create the service that controls the fan
+   ```
+   nano /lib/systemd/system/argononed.service
+   ```
+   In this file you can either copy the code below or manually enter it:
+```
+[Unit]
+Description=Argon One Fan and Button Service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+RemainAfterExit=true
+ExecStart=/usr/bin/python3 $powerbuttonscript
+[Install]
+WantedBy=multi-user.target
+```
+   - Set permissions for this file
+     ```
+     chmod 644 /lib/systemd/system/argononed.service
+     ```
+5. Enable and start the service
+   ```
+   systemctl daemon-reload
+   systemctl enable argononed.service
+   systemctl start argononed.service
+   ```
+6. You are done. You did it. You did such a great job. Give yourself a pat on the back. Or better yet:
+  ```
+  echo "I am proud of you"
+  ```
