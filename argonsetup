@@ -6,7 +6,7 @@ INTERACTIVE=True
 ASK_TO_REBOOT=0
 CONFIG=/boot/config.txt
 
-USER=${SUDO_USER:-$(who -m | awk '{ print $1 }')}
+USER=dietpi
 
 is_pi () {
   ARCH=$(dpkg --print-architecture)
