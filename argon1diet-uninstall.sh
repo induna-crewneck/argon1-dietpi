@@ -21,6 +21,10 @@ sudo rm /home/dietpi/Desktop/argonone-uninstall.desktop"
 sudo rm /usr/bin/argononed.py
 sudo rm /lib/systemd/system-shutdown/argononed-poweroff.py
 sudo rm /usr/bin/argonone-uninstall
+sudo rm /usr/share/pixmaps/ar1uninstall.png
+sudo rm /usr/share/pixmaps/ar1config.png
+sudo rm /root/Desktop/argonone-config.desktop
+sudo rm /root/Desktop/argonone-uninstall.desktop
 echo "Removed all the Argon One shit."
 echo "Rebooting is highly recommended"
 timeout /t 1
