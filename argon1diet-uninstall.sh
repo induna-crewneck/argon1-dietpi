@@ -7,7 +7,7 @@ echo "Sorry I'm not asking you to confirm. Couldn't get that to work."
 echo " ¯\_(ツ)_/¯"
 sleep 2
 echo "But because I'm nice I'll give you 3 seconds to abort.
-timeout /3
+sleep 3
 sudo systemctl stop argononed.service
 sudo systemctl disable argononed.service
 sudo /usr/bin/python3 /lib/systemd/system-shutdown/argononed-poweroff.py uninstall
