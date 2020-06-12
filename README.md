@@ -7,7 +7,7 @@ I have modified the argon1 script that installs the necessary files and makes th
 Installation is pretty straight forward. 
 
 ## The easy way
-### Up and running in 3 easy steps!
+#### Up and running in 3 easy steps!
 1. (Optional) If you don't have 'git' installed:
 ```
 apt-get install git -y
@@ -26,7 +26,7 @@ systemctl status argononed.service
 ```
 
 ## The hands-on way
-### If you want to get a little down and dirty
+#### If you want to get a little down and dirty
 1. Download [argon1diet.sh](/argon1diet.sh)
 
 2. Use FTP or whatever else means of getting files on your Pi to push the script (location doesn't matter AFAIK)
@@ -49,7 +49,7 @@ systemctl status argononed.service
    ```
 
 ## The incredibly tedious, fully manual way
-### If you just want to feel something again and this is your last resort before starting to eat thumb tacks
+#### If you just want to feel something again and this is your last resort before starting to eat thumb tacks
 1. Manually create the configuration file which asigns fan speeds to CPU temperature values
    ```
    nano /etc/argononed.conf
