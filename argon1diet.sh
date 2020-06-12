@@ -41,14 +41,15 @@ removescript=/usr/bin/argonone-uninstall
 
 daemonfanservice=/lib/systemd/system/$daemonname.service
 
-#sudo /boot/dietpi/argonsetup nonint do_i2c 0
-#sudo /boot/dietpi/argonsetup nonint do_serial 0
+#raspi-config nonint do_i2c 0
+#raspi-config nonint do_serial 0	
 #above 2 lines gave me headaches for 3 days. following lines should be all it needs
-sed --in-place "s/dtparam=i2c_arm=off/dtparam=i2c_arm=on/" /boot/config.txt
-sed --in-place "s/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/" /boot/config.txt
-sed --in-place "s/enable_uart=0/enable_uart=1/" /boot/config.txt
-sed --in-place "s/#enable_uart=1/enable_uart=1/" /boot/config.txt
-echo "i2c-dev" >> /etc/modules
+#Next 5 lines are attempted workarounds which should not be necessary if everything else is done according to my guide.
+#sed --in-place "s/dtparam=i2c_arm=off/dtparam=i2c_arm=on/" /boot/config.txt
+#sed --in-place "s/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/" /boot/config.txt
+#sed --in-place "s/enable_uart=0/enable_uart=1/" /boot/config.txt
+#sed --in-place "s/#enable_uart=1/enable_uart=1/" /boot/config.txt
+#echo "i2c-dev" >> /etc/modules
 	
 if [ ! -f $daemonconfigfile ]; then
 	# Generate config file for fan speed
@@ -249,9 +250,9 @@ echo 'then' >> $removescript
 echo '	echo "Cancelled"' >> $removescript
 echo '	exit' >> $removescript
 echo 'fi' >> $removescript
-echo 'if [ -d "/home/pi/Desktop" ]; then' >> $removescript
-echo '	sudo rm "/home/pi/Desktop/argonone-config.desktop"' >> $removescript
-echo '	sudo rm "/home/pi/Desktop/argonone-uninstall.desktop"' >> $removescript
+echo 'if [ -d "/root/Desktop" ]; then' >> $removescript
+echo '	sudo rm "/root/Desktop/argonone-config.desktop"' >> $removescript
+echo '	sudo rm "/root/Desktop/argonone-uninstall.desktop"' >> $removescript
 echo 'fi' >> $removescript
 echo 'if [ -f '$powerbuttonscript' ]; then' >> $removescript
 echo '	sudo systemctl stop '$daemonname'.service' >> $removescript
@@ -445,50 +446,29 @@ echo 'fi' >> $configscript
 
 sudo chmod 755 $configscript
 
+# Moving the repo files you might need to etc/argon1
+mkdir /etc/argon1
+mv /root/argon1-dietpi/argon1diet-uninstall.sh /etc/argon1/argon1diet-uninstall.sh
+mv /root/argon1-dietpi/argonsetup /etc/argon1/argonsetup
+chmod 766 /etc/argon1/argonsetup
+chmod 766 /etc/argon1/argon1diet-uninstall.sh
 
 sudo systemctl daemon-reload
 sudo systemctl enable $daemonname.service
 
 sudo systemctl start $daemonname.service
 
-if [ -d "/home/pi/Desktop" ]; then
-	sudo wget http://download.argon40.com/ar1config.png -O /usr/share/pixmaps/ar1config.png
-	sudo wget http://download.argon40.com/ar1uninstall.png -O /usr/share/pixmaps/ar1uninstall.png
-	# Create Shortcuts
-	shortcutfile="/home/pi/Desktop/argonone-config.desktop"
-	echo "[Desktop Entry]" > $shortcutfile
-	echo "Name=Argon One Configuration" >> $shortcutfile
-	echo "Comment=Argon One Configuration" >> $shortcutfile
-	echo "Icon=/usr/share/pixmaps/ar1config.png" >> $shortcutfile
-	echo 'Exec=lxterminal -t "Argon One Configuration" --working-directory=/home/pi/ -e '$configscript >> $shortcutfile
-	echo "Type=Application" >> $shortcutfile
-	echo "Encoding=UTF-8" >> $shortcutfile
-	echo "Terminal=false" >> $shortcutfile
-	echo "Categories=None;" >> $shortcutfile
-	chmod 755 $shortcutfile
-	
-	shortcutfile="/home/pi/Desktop/argonone-uninstall.desktop"
-	echo "[Desktop Entry]" > $shortcutfile
-	echo "Name=Argon One Uninstall" >> $shortcutfile
-	echo "Comment=Argon One Uninstall" >> $shortcutfile
-	echo "Icon=/usr/share/pixmaps/ar1uninstall.png" >> $shortcutfile
-	echo 'Exec=lxterminal -t "Argon One Uninstall" --working-directory=/home/pi/ -e '$removescript >> $shortcutfile
-	echo "Type=Application" >> $shortcutfile
-	echo "Encoding=UTF-8" >> $shortcutfile
-	echo "Terminal=false" >> $shortcutfile
-	echo "Categories=None;" >> $shortcutfile
-	chmod 755 $shortcutfile
-fi
-
 
 echo "***************************"
 echo "Argon One Setup Completed."
 echo "***************************"
 echo 
-if [ -d "/home/pi/Desktop" ]; then
-	echo Shortcuts created in your desktop.
-else
-	echo Use 'argonone-config' to configure fan
-	echo Use 'argonone-uninstall' to uninstall
-fi
+echo "Use 'argonone-config' to configure fan"
+echo "Use 'argonone-uninstall' to uninstall"
+sleep 1
+echo "Use 'sh /etc/argon1/argon1diet-uninstall.sh' to uninstall if you're on a diet."
+sleep 2
+echo "8=====D"
+sleep 1
+echo "It's a rocket ship."
 echo
