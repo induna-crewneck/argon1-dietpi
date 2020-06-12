@@ -398,10 +398,6 @@ echo 'fi' >> $configscript
 
 sudo chmod 755 $configscript
 
-#moving the downloaded repo files
-mv /root/argon1-dietpi/argon1diet-uninstall.sh /etc/argon1/argon1diet-uninstall.sh
-mv /root/argon1-dietpi/argonsetup /etc/argon1/argonsetup
-
 sudo systemctl daemon-reload
 sudo systemctl enable $daemonname.service
 
