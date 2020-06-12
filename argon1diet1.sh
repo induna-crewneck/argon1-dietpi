@@ -27,4 +27,11 @@ removescript=/usr/bin/argonone-uninstall
 
 daemonfanservice=/lib/systemd/system/$daemonname.service
 
+#moving the downloaded repo files
+mkdir /etc/argon1
+mv /root/argon1-dietpi/argon1diet-uninstall.sh /etc/argon1/argon1diet-uninstall.sh
+mv /root/argon1-dietpi/argonsetup /etc/argon1/argonsetup
+chmod 766 /etc/argon1/argonsetup
+chmod 766 /etc/argon1/argon1diet-uninstall.sh
+
 echo "First part of installation complete. Proceed according to guide."
