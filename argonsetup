@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # This is supposed to help install argon1.sh on DietPi.
 # Credit: https://github.com/induna-crewneck
+{
 
 INTERACTIVE=True
 ASK_TO_REBOOT=0
@@ -660,3 +661,4 @@ if [ "$INTERACTIVE" = True ]; then
     fi
   done
 fi
+}
