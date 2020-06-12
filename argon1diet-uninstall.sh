@@ -25,6 +25,8 @@ sudo rm /usr/share/pixmaps/ar1uninstall.png
 sudo rm /usr/share/pixmaps/ar1config.png
 sudo rm /root/Desktop/argonone-config.desktop
 sudo rm /root/Desktop/argonone-uninstall.desktop
+sudo rm -r /root/argon1-dietpi
+sudo rm -r /etc/argon1
 echo "Removed all the Argon One shit."
 echo "Rebooting is highly recommended"
 timeout /t 1
