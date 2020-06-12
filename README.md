@@ -42,7 +42,7 @@ systemctl status argononed.service
 ```
 6. Use the tools used in step 3 to remove the script. Unless you want to keep it as a memento of our little fan-installing-adventure. In this case you can place it in your souvenir folder. Mine is in /etc/remembrance/. Now you can look at it from time to time, reminiscing about the time before the argon 1 fan hat ran properly on your DietPi. And in those moments you would think of me and thank me for what I've done here today. You might even be tempted to run the script again, just to see if you can get the thrill back of running it the first time. But then you'd realize that moment is long gone and you can't go back to it. Unless? What's that you're thinking? You could reset your DietPi! Wipe everything! Start fresh! And then you could run the script again, as if it was the first time. And you would be back in that fleeting moment of bliss when the faint noise of the rotating fanblades atop your Raspberry Pi spin accelerated according to it's cpu temperature.
 
-Alternatively run
+   Alternatively run
 ```
 rm path/to/argon1diet.sh
 ```
